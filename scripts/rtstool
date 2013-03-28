@@ -45,8 +45,9 @@ def create(backing_device, name, userid, password, initiator_iqns=None):
             # Already exists, use this one
             return
 
-    so_new = rtslib.BlockStorageObject(name=name,
-                                       dev=backing_device)
+    so_new = rtslib.FileIOStorageObject(name=name,
+                                        dev=backing_device,
+                                        write_back=True)
 
     target_new = rtslib.Target(rtslib.FabricModule('iscsi'), name, 'create')
 
